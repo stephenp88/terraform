@@ -8,6 +8,5 @@ resource "aws_instance" "example" {
 
     tags = {
         Name = "terraform_example"
-        Project = "terraform"
     }
 }
