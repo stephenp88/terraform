@@ -10,17 +10,6 @@ data "aws_subnet_ids" "default" {
     vpc_id = data.aws_vpc.default.id
 }
 
-variable "server_port" {
-    description = "The port the server will listen on for http requests"
-    type        = number
-    default     = 8080
-}
-
-output "alb_dns_name" {
-  value         = aws_lb.example.dns_name
-  description   = "The domain name of the LB"
-}
-
 resource "aws_launch_configuration" "example" {
     image_id        = "ami-0058b56a5dcb590c9"
     instance_type   = "t2.micro"
@@ -46,8 +35,8 @@ resource "aws_autoscaling_group" "example" {
     target_group_arns = [aws_lb_target_group.asg.arn]
     health_check_type = "ELB"
 
-    min_size = 50
-    max_size = 100
+    min_size = 3
+    max_size = 9
 
     tag {
         key                 = "Name"
